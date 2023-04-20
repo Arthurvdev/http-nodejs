@@ -1,4 +1,4 @@
-import http from 'http';
+import https from 'https';
 import fetch from 'node-fetch';
 
 const API_KEY = 'C2KZNXSHOPILAEPYOVH6';
