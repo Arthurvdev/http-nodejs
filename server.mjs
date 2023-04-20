@@ -1,5 +1,8 @@
 import { createServer } from 'http';
 import https from 'https';
+res.setHeader('Access-Control-Allow-Origin', '*');
+res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+
 
 createServer((req, res) => {
   const options = {
