@@ -1,2 +1,6 @@
-https://api.brawlhalla.com/rankings/1v1/brz/1?api_key=C2KZNXSHOPILAEPYOVH6);
- 
+import { createServer } from 'https';
+
+createServer((req, res) => {
+  res.write('Hello World!');
+  res.end();
+}).listen(process.env.PORT);
