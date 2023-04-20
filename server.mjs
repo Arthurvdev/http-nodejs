@@ -1,20 +1,22 @@
-import fetch from 'node-fetch';
-import express from 'express';
+import https from 'https';
+import { createServer } from 'http';
 
-const app = express();
-
-app.get('/', async (req, res) => {
-  try {
-    const response = await fetch('https://api.brawlhalla.com/rankings/1v1/brz/1?api_key=C2KZNXSHOPILAEPYOVH6');
-    const data = await response.json();
-    res.json(data);
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: 'Internal Server Error' });
+const options = {
+  method: 'GET',
+  headers: {
+    'Content-Type': 'application/json'
   }
-});
+};
 
-const port = process.env.PORT || 3000;
-app.listen(port, () => {
-  console.log(`Server running on port ${port}`);
-});
+const url = 'https://api.brawlhalla.com/rankings/1v1/brz/1?api_key=C2KZNXSHOPILAEPYOVH6';
+
+createServer((req, res) => {
+  https.request(url, options, response => {
+    response.on('data', chunk => {
+      res.write(chunk);
+    });
+    response.on('end', () => {
+      res.end();
+    });
+  }).end();
+}).listen(process.env.PORT);
